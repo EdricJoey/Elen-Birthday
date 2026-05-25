@@ -1,471 +1,1003 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>Happy Birthday, Elen</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#f7ead8" />
+  <meta name="description" content="A small birthday letter website made with love." />
+  <title>Happy Birthday</title>
 
-<style>
-*{margin:0;padding:0;box-sizing:border-box;}
+  <!--
+    HOW TO CUSTOMIZE BEFORE UPLOADING TO GITHUB
+    1. Change the values inside the CONFIG object near the bottom of this file.
+    2. Put your files in the same folder as this index.html:
+       - song.mp3
+       - photo1.jpg, photo2.jpg, photo3.jpg, photo4.jpg, photo5.jpg
+    3. Upload everything to GitHub Pages.
+  -->
 
-body{
-  min-height:100vh;
-  font-family:Georgia,'Times New Roman',serif;
-  background:linear-gradient(135deg,#efe1cf,#d8c0a6,#f7efe5);
-  color:#4b3528;
-  overflow-x:hidden;
-}
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Lora:ital,wght@0,400;0,500;0,600;1,400&family=Playfair+Display:ital,wght@0,500;0,700;1,500&display=swap" rel="stylesheet" />
 
-.start-screen{
-  min-height:100vh;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  text-align:center;
-  padding:24px;
-}
+  <style>
+    :root {
+      --cream: #fff9f1;
+      --paper: #fffdf8;
+      --warm: #f3e3ce;
+      --blush: #edc8b1;
+      --rose: #cc8f7a;
+      --sand: #d4b48a;
+      --mocha: #866245;
+      --espresso: #432916;
+      --gold: #c48a35;
+      --shadow: rgba(67, 41, 22, 0.18);
+    }
 
-.letter-card{
-  background:rgba(255,248,238,0.97);
-  border:2px solid rgba(122,89,62,0.32);
-  border-radius:34px;
-  padding:46px 34px;
-  max-width:470px;
-  width:100%;
-  box-shadow:0 28px 75px rgba(86,56,35,0.28);
-  backdrop-filter:blur(18px);
-  animation:floatCard 3s ease-in-out infinite;
-}
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      min-height: 100vh;
+      overflow-x: hidden;
+      background:
+        radial-gradient(circle at top left, rgba(237, 200, 177, 0.45), transparent 38rem),
+        radial-gradient(circle at bottom right, rgba(196, 138, 53, 0.16), transparent 34rem),
+        var(--cream);
+      color: var(--espresso);
+      font-family: "Lora", Georgia, serif;
+    }
 
-.letter-icon{
-  font-size:72px;
-  margin-bottom:18px;
-}
+    body.no-scroll { overflow: hidden; }
 
-h1{
-  font-size:46px;
-  font-weight:700;
-  letter-spacing:1px;
-  margin-bottom:14px;
-}
+    .soft-grain {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 1;
+      opacity: 0.28;
+      background-image:
+        radial-gradient(circle, rgba(67, 41, 22, 0.055) 1px, transparent 1px),
+        radial-gradient(circle, rgba(196, 138, 53, 0.055) 1px, transparent 1px);
+      background-size: 34px 34px, 53px 53px;
+      background-position: 0 0, 12px 17px;
+      mix-blend-mode: multiply;
+    }
 
-.nickname{
-  display:inline-block;
-  margin-bottom:18px;
-  padding:8px 16px;
-  border-radius:999px;
-  background:rgba(139,103,79,0.14);
-  color:#7b4f38;
-  font-size:15px;
-}
+    .hearts span {
+      position: fixed;
+      bottom: -50px;
+      z-index: 2;
+      pointer-events: none;
+      color: rgba(134, 98, 69, 0.12);
+      animation: riseHeart linear infinite;
+      user-select: none;
+    }
 
-.subtitle{
-  font-size:16px;
-  line-height:1.7;
-  margin-bottom:28px;
-  color:#6a4d3b;
-}
+    .landing {
+      position: relative;
+      z-index: 5;
+      min-height: 100svh;
+      display: grid;
+      place-items: center;
+      padding: 32px 20px;
+      text-align: center;
+    }
 
-button{
-  border:none;
-  background:#8b674f;
-  color:#fff8ee;
-  padding:14px 30px;
-  border-radius:999px;
-  font-size:16px;
-  cursor:pointer;
-  box-shadow:0 12px 28px rgba(86,56,35,0.28);
-  transition:0.25s ease;
-}
+    .landing-card {
+      width: min(92vw, 440px);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
 
-button:hover{
-  transform:translateY(-2px);
-  background:#73513d;
-}
+    .landing-hint {
+      margin-bottom: 34px;
+      color: var(--mocha);
+      font-size: 0.72rem;
+      letter-spacing: 0.35em;
+      text-transform: uppercase;
+      opacity: 0.68;
+      animation: fadeUp 0.9s ease both;
+    }
 
-.main-content{
-  display:none;
-  position:relative;
-  min-height:100vh;
-  padding:56px 18px 120px;
-  overflow:hidden;
-}
+    .env-wrap {
+      position: relative;
+      width: min(320px, 78vw);
+      aspect-ratio: 10 / 7;
+      cursor: pointer;
+      border: 0;
+      background: transparent;
+      animation: floatEnv 3.8s ease-in-out infinite;
+      filter: drop-shadow(0 26px 36px rgba(67, 41, 22, 0.22));
+      -webkit-tap-highlight-color: transparent;
+    }
 
-.slideshow{
-  position:fixed;
-  inset:0;
-  z-index:-4;
-  overflow:hidden;
-  display:none;
-}
+    .env-wrap:focus-visible {
+      outline: 3px solid rgba(196, 138, 53, 0.5);
+      outline-offset: 12px;
+      border-radius: 20px;
+    }
 
-.slide{
-  position:absolute;
-  inset:0;
-  background-size:cover;
-  background-position:center;
-  opacity:0;
-  transform:scale(1.18);
-  filter:blur(8px);
-  transition:opacity 2s ease, transform 10s ease, filter 2s ease;
-}
+    .env-wrap.opening { animation: none; }
 
-.slide.active{
-  opacity:0.24;
-  transform:scale(1.04);
-  filter:blur(3px);
-  animation:kenBurns 10s ease forwards;
-}
+    .env-back,
+    .env-body {
+      position: absolute;
+      inset: 0;
+      border-radius: 9px 9px 16px 16px;
+      border: 1px solid rgba(196, 138, 53, 0.24);
+    }
 
-.overlay{
-  position:fixed;
-  inset:0;
-  background:
-    radial-gradient(circle at top, rgba(255,248,238,0.75), transparent 48%),
-    linear-gradient(135deg, rgba(239,225,207,0.93), rgba(247,239,229,0.86));
-  z-index:-3;
-  display:none;
-}
+    .env-back { background: linear-gradient(145deg, #f2ddbf, #dfc49b); }
+    .env-body {
+      z-index: 2;
+      overflow: hidden;
+      background: linear-gradient(170deg, #f6e8d1, #e9d0aa);
+      box-shadow: inset 0 2px 0 rgba(255, 255, 255, 0.55);
+    }
 
-.vignette{
-  position:fixed;
-  inset:0;
-  background:radial-gradient(circle, transparent 45%, rgba(75,53,40,0.18) 100%);
-  z-index:-2;
-  pointer-events:none;
-  display:none;
-}
+    .env-body::before,
+    .env-body::after {
+      content: "";
+      position: absolute;
+      bottom: 0;
+      width: 55%;
+      height: 58%;
+      background: rgba(212, 180, 138, 0.5);
+      z-index: 3;
+    }
 
-.letter-paper{
-  max-width:800px;
-  margin:0 auto;
-  background:rgba(255,250,242,0.985);
-  border:3px solid rgba(122,89,62,0.34);
-  border-radius:38px;
-  padding:52px 38px;
-  box-shadow:
-    0 34px 90px rgba(86,56,35,0.3),
-    inset 0 0 0 2px rgba(255,255,255,0.55);
-  backdrop-filter:blur(22px);
-  animation:softEnter 1.2s ease forwards;
-}
+    .env-body::before {
+      left: 0;
+      clip-path: polygon(0 0, 100% 100%, 0 100%);
+    }
 
-.dear-name{
-  text-align:center;
-  font-size:30px;
-  font-weight:700;
-  color:#8b674f;
-  margin-bottom:36px;
-  letter-spacing:2px;
-  text-transform:uppercase;
-}
+    .env-body::after {
+      right: 0;
+      clip-path: polygon(100% 0, 100% 100%, 0 100%);
+    }
 
-.wish{
-  font-size:20px;
-  line-height:1.95;
-  text-align:justify;
-  margin:24px 0;
-  opacity:0;
-  transform:translateY(20px);
-  filter:blur(8px);
-  transition:opacity 0.8s ease, transform 0.8s ease, filter 0.8s ease;
-}
+    .env-bottom {
+      position: absolute;
+      inset-inline: 0;
+      bottom: 0;
+      height: 58%;
+      z-index: 4;
+      background: linear-gradient(180deg, #dfc69f, #d3b887);
+      clip-path: polygon(0 100%, 50% 0, 100% 100%);
+    }
 
-.wish.visible{
-  opacity:1;
-  transform:translateY(0);
-  filter:blur(0);
-}
+    .env-flap {
+      position: absolute;
+      inset-inline: 0;
+      top: 0;
+      height: 63%;
+      z-index: 6;
+      background: linear-gradient(180deg, #ead5b3, #d9bd91);
+      clip-path: polygon(0 0, 50% 100%, 100% 0);
+      transform-origin: top center;
+      transition: transform 0.8s cubic-bezier(0.2, 0.72, 0.19, 1.02);
+    }
 
-.wish.typing::after{
-  content:"|";
-  animation:blink 0.75s infinite;
-  margin-left:4px;
-}
+    .env-wrap.opening .env-flap { transform: rotateX(180deg); }
 
-.highlight{
-  font-weight:700;
-  color:#6f4330;
-  background:linear-gradient(transparent 58%, rgba(218,177,137,0.55) 58%);
-  padding:0 3px;
-  border-radius:4px;
-  animation:boldGlow 1.4s ease forwards;
-}
+    .letter-peek {
+      position: absolute;
+      left: 7%;
+      right: 7%;
+      bottom: 9%;
+      height: 42%;
+      z-index: 5;
+      display: grid;
+      place-items: center;
+      overflow: hidden;
+      border: 1px solid rgba(196, 138, 53, 0.2);
+      border-radius: 8px;
+      background: linear-gradient(180deg, rgba(255, 253, 248, 0.98), rgba(247, 234, 216, 0.96));
+      transition: transform 0.85s cubic-bezier(0.34, 1.56, 0.64, 1) 0.35s;
+    }
 
-.dramatic{
-  display:inline-block;
-  animation:dramaticPulse 1.8s ease infinite;
-}
+    .letter-peek::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: repeating-linear-gradient(transparent, transparent 20px, rgba(134, 98, 69, 0.06) 21px);
+    }
 
-.final{
-  text-align:center;
-  font-size:34px;
-  color:#7b4f38;
-  font-style:italic;
-  margin-top:48px;
-}
+    .env-wrap.opening .letter-peek { transform: translateY(-72%); }
 
-.hearts span{
-  position:fixed;
-  bottom:-35px;
-  color:rgba(126,88,63,0.18);
-  animation:riseLove linear infinite;
-  pointer-events:none;
-  z-index:0;
-}
+    .peek-text {
+      position: relative;
+      z-index: 1;
+      color: var(--mocha);
+      font-family: "Great Vibes", cursive;
+      font-size: clamp(1.4rem, 6vw, 2rem);
+      opacity: 0.78;
+    }
 
-.progress-wrap{
-  position:fixed;
-  left:20px;
-  right:20px;
-  bottom:18px;
-  height:7px;
-  background:rgba(139,103,79,0.16);
-  border-radius:999px;
-  overflow:hidden;
-  z-index:20;
-  display:none;
-}
+    .seal {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      z-index: 8;
+      width: 54px;
+      height: 54px;
+      display: grid;
+      place-items: center;
+      border-radius: 999px;
+      transform: translate(-50%, -50%);
+      background: radial-gradient(circle at 35% 30%, #dfa751, #9a682d 72%);
+      color: #fff7ec;
+      font-size: 1.35rem;
+      box-shadow: 0 8px 22px rgba(104, 64, 29, 0.38), inset 0 1px 0 rgba(255, 255, 255, 0.25);
+      transition: transform 0.35s ease, opacity 0.35s ease;
+    }
 
-.progress{
-  width:0%;
-  height:100%;
-  background:#8b674f;
-  border-radius:999px;
-}
+    .env-wrap.opening .seal { transform: translate(-50%, -50%) scale(0.2); opacity: 0; }
 
-audio{display:none;}
+    .env-label {
+      margin-top: 30px;
+      color: var(--mocha);
+      font-size: 0.75rem;
+      letter-spacing: 0.28em;
+      text-transform: uppercase;
+      opacity: 0;
+      animation: fadeUp 0.8s 0.8s ease forwards;
+    }
 
-@keyframes softEnter{
-  from{opacity:0;transform:scale(0.97) translateY(18px);filter:blur(12px);}
-  to{opacity:1;transform:scale(1) translateY(0);filter:blur(0);}
-}
+    .env-label span { display: inline-block; animation: bobble 2s 1.2s ease-in-out infinite; }
 
-@keyframes floatCard{
-  0%,100%{transform:translateY(0);}
-  50%{transform:translateY(-9px);}
-}
+    .transition-overlay {
+      position: fixed;
+      inset: 0;
+      z-index: 90;
+      pointer-events: none;
+      background: var(--cream);
+      opacity: 0;
+      transition: opacity 0.55s ease;
+    }
 
-@keyframes blink{
-  0%,45%{opacity:1;}
-  46%,100%{opacity:0;}
-}
+    .transition-overlay.show { opacity: 1; pointer-events: auto; }
 
-@keyframes riseLove{
-  from{
-    transform:translateY(0) rotate(0deg) scale(0.8);
-    opacity:0;
-  }
-  20%{opacity:1;}
-  to{
-    transform:translateY(-115vh) rotate(360deg) scale(1.25);
-    opacity:0;
-  }
-}
+    .main {
+      position: relative;
+      z-index: 4;
+      display: none;
+      padding-bottom: 150px;
+    }
 
-@keyframes boldGlow{
-  0%{text-shadow:0 0 0 rgba(111,67,48,0);}
-  45%{text-shadow:0 0 16px rgba(139,103,79,0.42);}
-  100%{text-shadow:0 0 0 rgba(111,67,48,0);}
-}
+    .hero {
+      position: relative;
+      overflow: hidden;
+      padding: 78px 22px 62px;
+      text-align: center;
+      background: linear-gradient(170deg, var(--warm), rgba(255, 249, 241, 0));
+      border-bottom: 1px solid rgba(196, 138, 53, 0.12);
+    }
 
-@keyframes dramaticPulse{
-  0%,100%{transform:scale(1);}
-  50%{transform:scale(1.035);}
-}
+    .hero::before {
+      content: "";
+      position: absolute;
+      left: 50%;
+      top: 16px;
+      width: 420px;
+      height: 420px;
+      transform: translateX(-50%);
+      border-radius: 999px;
+      background: radial-gradient(circle, rgba(255,255,255,0.66), transparent 68%);
+    }
 
-@keyframes kenBurns{
-  from{transform:scale(1.18);}
-  to{transform:scale(1.04);}
-}
+    .hero > * { position: relative; }
 
-@media(max-width:600px){
-  h1{font-size:35px;}
-  .dear-name{font-size:23px;}
-  .wish{font-size:18px;line-height:1.85;margin:22px 0;}
-  .letter-paper{padding:36px 24px;}
-  .final{font-size:28px;}
-}
-</style>
+    .hero-eyebrow {
+      margin-bottom: 12px;
+      color: var(--mocha);
+      font-size: 0.72rem;
+      letter-spacing: 0.42em;
+      text-transform: uppercase;
+      opacity: 0.62;
+      animation: fadeUp 0.9s 0.1s both;
+    }
+
+    .hero-title {
+      color: var(--espresso);
+      font-family: "Great Vibes", cursive;
+      font-size: clamp(4.5rem, 14vw, 8.5rem);
+      line-height: 0.9;
+      text-shadow: 0 9px 36px rgba(67, 41, 22, 0.12);
+      animation: fadeUp 0.9s 0.22s both;
+    }
+
+    .hero-name {
+      margin-top: 16px;
+      color: var(--mocha);
+      font-family: "Playfair Display", serif;
+      font-size: clamp(1rem, 3.2vw, 1.45rem);
+      font-style: italic;
+      letter-spacing: 0.16em;
+      animation: fadeUp 0.9s 0.36s both;
+    }
+
+    .top-actions {
+      position: sticky;
+      top: 12px;
+      z-index: 40;
+      width: min(92vw, 720px);
+      margin: -18px auto 0;
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      pointer-events: none;
+    }
+
+    .action-btn {
+      pointer-events: auto;
+      border: 1px solid rgba(196, 138, 53, 0.2);
+      border-radius: 999px;
+      background: rgba(255, 253, 248, 0.86);
+      color: var(--mocha);
+      padding: 10px 14px;
+      font-family: "Lora", serif;
+      font-size: 0.78rem;
+      letter-spacing: 0.08em;
+      box-shadow: 0 10px 26px rgba(67, 41, 22, 0.12);
+      backdrop-filter: blur(10px);
+      cursor: pointer;
+      transition: transform 0.2s ease, background 0.2s ease;
+    }
+
+    .action-btn:hover { transform: translateY(-2px); background: rgba(255, 253, 248, 0.98); }
+
+    .letter-outer {
+      width: min(92vw, 720px);
+      margin: 46px auto 0;
+    }
+
+    .letter-paper {
+      position: relative;
+      overflow: hidden;
+      border: 1px solid rgba(196, 138, 53, 0.16);
+      border-radius: 30px;
+      background: rgba(255, 253, 248, 0.98);
+      padding: clamp(34px, 7vw, 62px) clamp(22px, 6vw, 54px) 64px;
+      box-shadow: 0 36px 90px rgba(67, 41, 22, 0.16), inset 0 2px 0 rgba(255,255,255,0.86);
+      animation: paperReveal 0.9s 0.15s both;
+    }
+
+    .letter-paper::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      background: repeating-linear-gradient(transparent, transparent 38px, rgba(134, 98, 69, 0.038) 39px);
+    }
+
+    .letter-paper::after {
+      content: "";
+      position: absolute;
+      inset: auto -20% -40% -20%;
+      height: 280px;
+      background: radial-gradient(circle, rgba(237, 200, 177, 0.25), transparent 70%);
+      pointer-events: none;
+    }
+
+    .letter-paper > * { position: relative; z-index: 1; }
+
+    .dear {
+      text-align: center;
+      color: var(--mocha);
+      font-family: "Great Vibes", cursive;
+      font-size: clamp(2.25rem, 7vw, 3.5rem);
+      line-height: 1.1;
+    }
+
+    .dear-rule {
+      width: 74px;
+      height: 1px;
+      margin: 14px auto 42px;
+      background: linear-gradient(90deg, transparent, var(--gold), transparent);
+    }
+
+    .wish {
+      margin: 0 0 30px;
+      color: rgba(67, 41, 22, 0.92);
+      font-size: clamp(1.02rem, 2.6vw, 1.18rem);
+      line-height: 2.05;
+      opacity: 0;
+      transform: translateY(18px);
+      transition: opacity 0.9s ease, transform 0.9s ease;
+    }
+
+    .wish.visible { opacity: 1; transform: translateY(0); }
+    .wish.typing::after { content: "|"; color: var(--mocha); animation: blink 0.7s infinite; }
+
+    .hl {
+      border-radius: 4px;
+      padding-inline: 2px;
+      color: var(--espresso);
+      font-weight: 600;
+      background: linear-gradient(transparent 62%, rgba(196, 138, 53, 0.25) 62%);
+    }
+
+    .pulse { display: inline-block; animation: pulse 2.2s ease-in-out infinite; }
+
+    .pull-quote {
+      margin: 8px 0 32px;
+      padding: 22px 26px;
+      border-left: 3px solid var(--gold);
+      border-radius: 0 18px 18px 0;
+      background: rgba(196, 138, 53, 0.07);
+      color: var(--espresso);
+      font-family: "Playfair Display", serif;
+      font-size: clamp(1.08rem, 2.7vw, 1.32rem);
+      font-style: italic;
+      line-height: 1.85;
+      opacity: 0;
+      transform: translateX(-14px);
+      transition: opacity 0.9s ease, transform 0.9s ease;
+    }
+
+    .pull-quote.visible { opacity: 1; transform: translateX(0); }
+
+    .float-word {
+      margin: 10px 0 34px;
+      text-align: center;
+      color: var(--mocha);
+      font-family: "Great Vibes", cursive;
+      font-size: clamp(3rem, 8vw, 4.8rem);
+      line-height: 1.1;
+      opacity: 0;
+      transform: scale(0.92);
+      transition: opacity 0.9s ease, transform 0.9s ease;
+    }
+
+    .float-word.visible { opacity: 0.76; transform: scale(1); }
+
+    .ornament {
+      margin: 6px 0 36px;
+      text-align: center;
+      color: var(--sand);
+      font-size: 1.1rem;
+      letter-spacing: 1rem;
+      opacity: 0;
+      transition: opacity 0.8s ease;
+    }
+
+    .ornament.visible { opacity: 0.7; }
+
+    .photo-moment {
+      position: relative;
+      overflow: hidden;
+      margin: 6px 0 34px;
+      border: 1px solid rgba(196, 138, 53, 0.16);
+      border-radius: 24px;
+      background: rgba(243, 227, 206, 0.55);
+      box-shadow: 0 15px 36px rgba(67, 41, 22, 0.13);
+      opacity: 0;
+      transform: translateY(18px) scale(0.985);
+      transition: opacity 0.9s ease, transform 0.9s ease;
+    }
+
+    .photo-moment.visible { opacity: 1; transform: translateY(0) scale(1); }
+
+    .photo-moment img {
+      display: block;
+      width: 100%;
+      height: clamp(210px, 45vw, 320px);
+      object-fit: cover;
+    }
+
+    .photo-caption {
+      padding: 11px 14px 13px;
+      text-align: center;
+      color: var(--mocha);
+      font-size: 0.72rem;
+      font-style: italic;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      opacity: 0.58;
+    }
+
+    .ph-placeholder {
+      min-height: 220px;
+      display: grid;
+      place-items: center;
+      gap: 8px;
+      padding: 26px;
+      text-align: center;
+      background:
+        linear-gradient(135deg, rgba(255,255,255,0.28), transparent),
+        linear-gradient(160deg, var(--warm), var(--blush));
+      color: rgba(67, 41, 22, 0.5);
+    }
+
+    .ph-placeholder strong {
+      display: block;
+      margin-top: 8px;
+      font-family: "Great Vibes", cursive;
+      font-size: 2rem;
+      font-weight: 400;
+    }
+
+    .ph-placeholder span {
+      display: block;
+      margin-top: 4px;
+      font-size: 0.72rem;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+    }
+
+    .wish.final {
+      margin-top: 44px;
+      text-align: center;
+      color: var(--espresso);
+      font-family: "Great Vibes", cursive;
+      font-size: clamp(2.7rem, 8vw, 4rem);
+      line-height: 1.25;
+    }
+
+    .progress-bar {
+      position: fixed;
+      inset: auto 0 0 0;
+      z-index: 70;
+      display: none;
+      border-top: 1px solid rgba(196, 138, 53, 0.16);
+      background: rgba(255, 249, 241, 0.94);
+      padding: 10px 20px 12px;
+      backdrop-filter: blur(12px);
+    }
+
+    .progress-inner { width: min(920px, 100%); margin: 0 auto; }
+
+    .prog-label {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 18px;
+      margin-bottom: 7px;
+      color: var(--mocha);
+      font-size: 0.68rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      opacity: 0.7;
+    }
+
+    .prog-track {
+      height: 5px;
+      overflow: hidden;
+      border-radius: 999px;
+      background: rgba(134, 98, 69, 0.13);
+    }
+
+    .prog-fill {
+      height: 100%;
+      width: 0%;
+      border-radius: inherit;
+      background: linear-gradient(90deg, var(--blush), var(--gold), var(--mocha));
+      transition: width 0.55s ease;
+    }
+
+    .chapters {
+      display: flex;
+      align-items: center;
+      gap: 0;
+      margin-top: 9px;
+    }
+
+    .chapter-dot {
+      width: 7px;
+      height: 7px;
+      flex-shrink: 0;
+      border: 1px solid rgba(134, 98, 69, 0.35);
+      border-radius: 999px;
+      background: rgba(134, 98, 69, 0.16);
+      transition: transform 0.25s ease, background 0.3s ease;
+    }
+
+    .chapter-dot.active { transform: scale(1.55); background: var(--mocha); }
+    .chapter-dot.done { background: var(--gold); border-color: var(--gold); }
+
+    .chapter-line {
+      position: relative;
+      flex: 1;
+      height: 2px;
+      overflow: hidden;
+      background: rgba(134, 98, 69, 0.12);
+    }
+
+    .chapter-line span {
+      position: absolute;
+      inset: 0 auto 0 0;
+      width: 0%;
+      background: var(--gold);
+      transition: width 0.4s ease;
+    }
+
+    @keyframes floatEnv { 0%, 100% { transform: translateY(0) rotate(-0.4deg); } 50% { transform: translateY(-12px) rotate(0.4deg); } }
+    @keyframes fadeUp { from { opacity: 0; transform: translateY(18px); } to { opacity: 1; transform: translateY(0); } }
+    @keyframes bobble { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(5px); } }
+    @keyframes paperReveal { from { opacity: 0; transform: translateY(18px) scale(0.985); filter: blur(4px); } to { opacity: 1; transform: translateY(0) scale(1); filter: blur(0); } }
+    @keyframes blink { 0%, 45% { opacity: 1; } 46%, 100% { opacity: 0; } }
+    @keyframes pulse { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.035); } }
+    @keyframes riseHeart { from { transform: translateY(0) scale(0.7) rotate(0deg); opacity: 0; } 12% { opacity: 1; } to { transform: translateY(-112vh) scale(1.25) rotate(28deg); opacity: 0; } }
+
+    @media (max-width: 620px) {
+      .landing-hint, .hero-eyebrow { letter-spacing: 0.28em; }
+      .letter-outer { width: min(94vw, 720px); margin-top: 34px; }
+      .letter-paper { border-radius: 24px; }
+      .wish { line-height: 1.9; }
+      .top-actions { top: 8px; gap: 8px; }
+      .action-btn { padding: 9px 11px; font-size: 0.7rem; }
+      .progress-bar { padding: 9px 14px 10px; }
+      .prog-label { font-size: 0.6rem; letter-spacing: 0.15em; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        scroll-behavior: auto !important;
+        transition-duration: 0.01ms !important;
+      }
+    }
+  </style>
 </head>
+<body class="no-scroll">
+  <div class="soft-grain" aria-hidden="true"></div>
+  <div class="hearts" id="hearts" aria-hidden="true"></div>
+  <div class="transition-overlay" id="transitionOverlay" aria-hidden="true"></div>
 
-<body>
+  <section class="landing" id="landing">
+    <div class="landing-card">
+      <p class="landing-hint" id="landingHint">ada sesuatu untukmu</p>
 
-<div class="hearts" id="hearts"></div>
+      <button class="env-wrap" id="envelope" type="button" aria-label="Buka surat">
+        <span class="env-back"></span>
+        <span class="letter-peek"><span class="peek-text" id="peekText">Untukmu ♡</span></span>
+        <span class="env-body"><span class="env-bottom"></span></span>
+        <span class="env-flap"></span>
+        <span class="seal">♡</span>
+      </button>
 
-<section class="start-screen" id="startScreen">
-  <div class="letter-card">
-    <div class="letter-icon">💌</div>
-    <h1>Untuk Elen</h1>
-    <div class="nickname">sayangku • cintaku • rumahku</div>
-    <p class="subtitle">Ada satu surat kecil yang ingin aku bacakan pelan-pelan, bersama lagu ini.</p>
-    <button onclick="openLetter()">Press the letter</button>
-  </div>
-</section>
+      <p class="env-label"><span>↓ ketuk untuk membuka</span></p>
+    </div>
+  </section>
 
-<div class="slideshow" id="slideshow">
-  <div class="slide active" style="background-image:url('photo1.jpg')"></div>
-  <div class="slide" style="background-image:url('photo2.jpg')"></div>
-  <div class="slide" style="background-image:url('photo3.jpg')"></div>
-  <div class="slide" style="background-image:url('photo4.jpg')"></div>
-</div>
+  <main class="main" id="main">
+    <section class="hero">
+      <p class="hero-eyebrow" id="heroEyebrow">♡ — untuk yang paling berarti — ♡</p>
+      <h1 class="hero-title" id="heroTitle">Happy Birthday</h1>
+      <p class="hero-name" id="heroName">Nama · Usia</p>
+    </section>
 
-<div class="overlay" id="overlay"></div>
-<div class="vignette" id="vignette"></div>
+    <div class="top-actions" aria-label="Kontrol halaman">
+      <button class="action-btn" id="musicButton" type="button">Pause music</button>
+      <button class="action-btn" id="scrollButton" type="button">Scroll</button>
+    </div>
 
-<main class="main-content" id="mainContent">
-  <div class="letter-paper">
+    <section class="letter-outer">
+      <article class="letter-paper" aria-label="Birthday letter">
+        <h2 class="dear" id="dearTitle">Happy Birthday</h2>
+        <div class="dear-rule"></div>
 
-    <div class="dear-name">Happy Birthday, Elen</div>
+        <p class="wish" data-chapter="1" data-text="<span class='hl pulse'>Happy birthday, sayangku.</span>"></p>
+        <p class="wish" data-chapter="1" data-text="<span class='hl'>Selamat ulang tahun yang ke 28, cintaku.</span> Hari ini bukan sekadar pertambahan angka — tapi tentang bagaimana semesta diam-diam merayakan hadirnya kamu, seseorang yang bukan hanya berarti, tapi juga <span class='hl'>menjadi bagian dari makna hidupku.</span>"></p>
+        <div class="photo-moment" data-chapter="1" data-photo="photo1.jpg" data-caption="kamu, selalu"></div>
 
-    <p class="wish" data-text="<span class='highlight dramatic'>Happy birthday, sayangku.</span>"></p>
+        <div class="pull-quote" data-chapter="2">“Semoga setiap langkahmu dipenuhi jalan yang baik, dan setiap impianmu menemukan jalannya.”</div>
+        <p class="wish" data-chapter="2" data-text="Aku berdoa, semoga setiap langkahmu selalu dipenuhi jalan yang baik. <span class='hl'>Semoga semua cita-citamu menemukan jalannya untuk terwujud,</span> dan setiap impian yang kamu simpan dengan sabar perlahan datang menghampiri — tanpa ragu."></p>
+        <p class="wish" data-chapter="2" data-text="Semoga Tuhan selalu menjaga kamu, memberkati setiap usahamu, dan melimpahkan rezeki serta kebahagiaan yang tak pernah habis."></p>
+        <div class="float-word" data-chapter="2">Amiiinn ♡</div>
+        <div class="photo-moment" data-chapter="2" data-photo="photo2.jpg" data-caption="doaku selalu untukmu"></div>
+        <div class="ornament" data-chapter="2">✦ ✦ ✦</div>
 
-    <p class="wish" data-text="<span class='highlight'>Selamat ulang tahun yang ke 28, cintaku.</span> Hari ini bukan sekadar pertambahan angka, tapi tentang bagaimana semesta diam-diam merayakan hadirnya kamu, seseorang yang bukan hanya berarti, tapi juga <span class='highlight'>menjadi bagian dari makna hidupku.</span>"></p>
+        <p class="wish" data-chapter="3" data-text="Terima kasih karena sudah hadir dalam hidupku. Sejak ada kamu, aku mengenal rasa yang sebelumnya tak pernah benar-benar aku pahami —"></p>
+        <div class="pull-quote" data-chapter="3">“Kebahagiaan yang sederhana, tapi terasa utuh dan menenangkan.”</div>
+        <p class="wish" data-chapter="3" data-text="Seolah dunia yang dulu berjalan begitu saja, kini punya warna, punya arah, dan punya alasan untuk terus diperjuangkan."></p>
+        <div class="photo-moment" data-chapter="3" data-photo="photo3.jpg" data-caption="momen yang selalu aku ingat"></div>
+        <p class="wish" data-chapter="3" data-text="<span class='hl'>Terima kasih karena sudah mencintaiku dengan begitu tulus.</span> Terima kasih karena selalu ada, bahkan di saat aku tidak mudah untuk dimengerti. Kehadiranmu bukan hanya menemani, tapi juga <span class='hl'>menguatkan, menenangkan, dan tanpa sadar — menyembuhkan.</span>"></p>
+        <div class="ornament" data-chapter="3">✦ ✦ ✦</div>
 
-    <p class="wish" data-text="Aku berdoa, semoga setiap langkahmu selalu dipenuhi jalan yang baik. <span class='highlight'>Semoga semua cita-citamu menemukan jalannya untuk terwujud,</span> dan setiap impian yang kamu simpan dengan sabar perlahan datang menghampiri, tanpa ragu. Semoga Tuhan selalu menjaga kamu, memberkati setiap usahamu, dan melimpahkan rezeki serta kebahagiaan yang tak pernah habis."></p>
+        <p class="wish" data-chapter="4" data-text="Di hari spesialmu ini, aku hanya ingin kamu bahagia. Sungguh, <span class='hl'>kebahagiaanmu adalah hal yang paling ingin aku jaga, lebih dari apa pun.</span>"></p>
+        <p class="wish" data-chapter="4" data-text="Karena di dalam senyummu, aku menemukan arah, dan di sanalah tujuan hidupku perlahan menjadi jelas. Seolah setiap langkahku, pada akhirnya, selalu ingin kembali padamu."></p>
+        <div class="photo-moment" data-chapter="4" data-photo="photo4.jpg" data-caption="senyummu yang aku suka"></div>
+        <div class="ornament" data-chapter="4">✦ ✦ ✦</div>
 
-    <p class="wish" data-text="<span class='highlight dramatic'>AMIIIINNNN</span>"></p>
+        <p class="wish" data-chapter="5" data-text="Aku berharap kita akan terus seperti ini — <span class='hl'>berjalan berdampingan, melewati waktu tanpa saling melepaskan.</span> Bukan hanya hari ini, tapi untuk hari-hari panjang yang belum kita tulis ceritanya."></p>
+        <p class="wish" data-chapter="5" data-text="Jika suatu saat langkah kita terasa berat, aku ingin tetap di sampingmu, menggenggam tanpa banyak kata, memastikan kamu tidak pernah merasa sendiri."></p>
+        <div class="photo-moment" data-chapter="5" data-photo="photo5.jpg" data-caption="untuk hari-hari yang belum kita tulis"></div>
+        <div class="pull-quote" data-chapter="5">“Terima kasih, sayang — karena sudah menjadi rumah, tempat aku pulang, tanpa harus pergi ke mana-mana.”</div>
+        <p class="wish final" data-chapter="5" data-text="Love you, always. ♡"></p>
+      </article>
+    </section>
+  </main>
 
-    <p class="wish" data-text="Terima kasih karena sudah hadir dalam hidupku. Sejak ada kamu, aku mengenal rasa yang sebelumnya tak pernah benar-benar aku pahami, <span class='highlight'>kebahagiaan yang sederhana, tapi terasa utuh dan menenangkan.</span> Seolah dunia yang dulu berjalan begitu saja, kini punya warna, punya arah, dan punya alasan untuk terus diperjuangkan."></p>
+  <aside class="progress-bar" id="progressBar" aria-label="Progress membaca surat">
+    <div class="progress-inner">
+      <div class="prog-label">
+        <span id="chapterLabel">Membuka surat…</span>
+        <span id="percentLabel">0%</span>
+      </div>
+      <div class="prog-track"><div class="prog-fill" id="progFill"></div></div>
+      <div class="chapters" id="chapters"></div>
+    </div>
+  </aside>
 
-    <p class="wish" data-text="<span class='highlight'>Terima kasih karena sudah mencintaiku dengan begitu tulus.</span> Terima kasih karena selalu ada, bahkan di saat aku tidak mudah untuk dimengerti. Kehadiranmu bukan hanya menemani, tapi juga <span class='highlight'>menguatkan, menenangkan, dan tanpa sadar, menyembuhkan.</span>"></p>
+  <audio id="song" src="song.mp3" preload="auto" loop></audio>
 
-    <p class="wish" data-text="Di hari spesialmu ini, aku hanya ingin kamu bahagia. Sungguh, <span class='highlight'>kebahagiaanmu adalah hal yang paling ingin aku jaga, lebih dari apa pun.</span> Karena di dalam senyummu, aku menemukan arah, dan di sanalah, tujuan hidupku perlahan menjadi jelas. Seolah setiap langkahku, pada akhirnya, selalu ingin kembali padamu."></p>
+  <script>
+    /* =========================
+       EDIT THIS PART ONLY
+       ========================= */
+    const CONFIG = {
+      recipientName: "Elen",
+      age: "28",
+      landingText: "ada sesuatu untukmu",
+      envelopeText: "Untuk Elen ♡",
+      heroEyebrow: "♡ — untuk yang paling berarti — ♡",
+      heroTitle: "Happy Birthday",
+      musicFile: "song.mp3",
+      chapters: [
+        { id: 1, label: "Pembukaan" },
+        { id: 2, label: "Doa Untukmu" },
+        { id: 3, label: "Terima Kasih" },
+        { id: 4, label: "Kebahagiaanmu" },
+        { id: 5, label: "Selamanya" }
+      ]
+    };
 
-    <p class="wish" data-text="Aku berharap kita akan terus seperti ini, <span class='highlight'>berjalan berdampingan, melewati waktu tanpa saling melepaskan.</span> Bukan hanya hari ini, tapi untuk hari-hari panjang yang belum kita tulis ceritanya. Jika suatu saat langkah kita terasa berat, aku ingin tetap di sampingmu, menggenggam tanpa banyak kata, memastikan kamu tidak pernah merasa sendiri."></p>
+    const $ = (selector) => document.querySelector(selector);
+    const $$ = (selector) => [...document.querySelectorAll(selector)];
 
-    <p class="wish" data-text="Terima kasih, sayang… karena sudah menjadi <span class='highlight dramatic'>rumah, tempat aku pulang, tanpa harus pergi ke mana-mana.</span>"></p>
+    const envelope = $("#envelope");
+    const transitionOverlay = $("#transitionOverlay");
+    const landing = $("#landing");
+    const main = $("#main");
+    const progressBar = $("#progressBar");
+    const song = $("#song");
+    const musicButton = $("#musicButton");
+    const scrollButton = $("#scrollButton");
 
-    <p class="wish final" data-text="<span class='highlight dramatic'>Love you, always.</span>"></p>
+    let opened = false;
+    let revealTotal = 0;
+    let revealDone = 0;
+    let currentChapter = null;
+    let autoScroll = false;
+    let scrollTimer = null;
+    const queue = [];
+    let queueBusy = false;
 
-  </div>
-</main>
+    function applyConfig() {
+      document.title = `${CONFIG.heroTitle}, ${CONFIG.recipientName}`;
+      $("#landingHint").textContent = CONFIG.landingText;
+      $("#peekText").textContent = CONFIG.envelopeText;
+      $("#heroEyebrow").textContent = CONFIG.heroEyebrow;
+      $("#heroTitle").textContent = CONFIG.heroTitle;
+      $("#heroName").textContent = `${CONFIG.recipientName} · ${CONFIG.age} Tahun`;
+      $("#dearTitle").textContent = `${CONFIG.heroTitle}, ${CONFIG.recipientName}`;
+      song.src = CONFIG.musicFile;
+    }
 
-<div class="progress-wrap" id="progressWrap">
-  <div class="progress" id="progress"></div>
-</div>
+    function buildPhotos() {
+      $$(".photo-moment").forEach((box) => {
+        const src = box.dataset.photo;
+        const caption = box.dataset.caption || "foto kenangan";
+        box.innerHTML = `
+          <img src="${src}" alt="${caption}" loading="lazy" onerror="this.replaceWith(createPhotoPlaceholder('${caption.replace(/'/g, "\\'")}'))" />
+          <div class="photo-caption">${caption}</div>
+        `;
+      });
+    }
 
-<audio id="song" src="song.mp3"></audio>
+    function createPhotoPlaceholder(caption) {
+      const placeholder = document.createElement("div");
+      placeholder.className = "ph-placeholder";
+      placeholder.innerHTML = `<div>♡<strong>Tambahkan foto</strong><span>${caption}</span></div>`;
+      return placeholder;
+    }
 
-<script>
-let slideInterval;
-let progressInterval;
+    function buildChapterDots() {
+      const wrap = $("#chapters");
+      wrap.innerHTML = "";
+      CONFIG.chapters.forEach((chapter, index) => {
+        const dot = document.createElement("span");
+        dot.className = "chapter-dot";
+        dot.id = `chapter-dot-${chapter.id}`;
+        dot.title = chapter.label;
+        wrap.appendChild(dot);
 
-function openLetter(){
-  document.getElementById("startScreen").style.display="none";
-  document.getElementById("mainContent").style.display="block";
-  document.getElementById("slideshow").style.display="block";
-  document.getElementById("overlay").style.display="block";
-  document.getElementById("vignette").style.display="block";
-  document.getElementById("progressWrap").style.display="block";
+        if (index < CONFIG.chapters.length - 1) {
+          const line = document.createElement("span");
+          line.className = "chapter-line";
+          line.innerHTML = `<span id="chapter-line-${chapter.id}"></span>`;
+          wrap.appendChild(line);
+        }
+      });
+    }
 
-  window.scrollTo(0,0);
+    function openEnvelope() {
+      if (opened) return;
+      opened = true;
+      envelope.classList.add("opening");
 
-  const song=document.getElementById("song");
-  song.play().catch(()=>{
-    console.log("song.mp3 belum ada atau browser butuh izin audio.");
-  });
+      setTimeout(() => {
+        transitionOverlay.classList.add("show");
+        setTimeout(() => {
+          landing.style.display = "none";
+          main.style.display = "block";
+          progressBar.style.display = "block";
+          document.body.classList.remove("no-scroll");
+          window.scrollTo(0, 0);
+          song.play().then(() => updateMusicButton()).catch(() => {
+            musicButton.textContent = "Play music";
+          });
+          initReveal();
+          setTimeout(() => transitionOverlay.classList.remove("show"), 180);
+        }, 520);
+      }, 850);
+    }
 
-  typeParagraphs();
-  startSlideshow();
-  startProgressBar();
-}
+    function initReveal() {
+      const items = $$(".wish, .photo-moment, .pull-quote, .float-word, .ornament");
+      revealTotal = items.length;
 
-function typeParagraphs(){
-  const paragraphs=document.querySelectorAll(".wish");
-  let pIndex=0;
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            enqueue(entry.target);
+            observer.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.12, rootMargin: "0px 0px -8% 0px" });
 
-  function typeNextParagraph(){
-    if(pIndex>=paragraphs.length)return;
+      items.forEach((item) => observer.observe(item));
+    }
 
-    const paragraph=paragraphs[pIndex];
-    const fullText=paragraph.getAttribute("data-text");
+    function enqueue(element) {
+      queue.push(element);
+      if (!queueBusy) drainQueue();
+    }
 
-    paragraph.classList.add("visible","typing");
-
-    let i=0;
-    let output="";
-    let insideTag=false;
-
-    function typeChar(){
-      if(i>=fullText.length){
-        paragraph.innerHTML=fullText;
-        paragraph.classList.remove("typing");
-
-        let pause=900;
-        if(fullText.includes("AMIIIINNNN")) pause=1800;
-        if(fullText.includes("rumah")) pause=1900;
-        if(fullText.includes("Love you")) pause=2200;
-
-        pIndex++;
-        setTimeout(typeNextParagraph,pause);
+    function drainQueue() {
+      if (!queue.length) {
+        queueBusy = false;
         return;
       }
 
-      const char=fullText[i];
+      queueBusy = true;
+      const element = queue.shift();
+      const chapter = Number(element.dataset.chapter || 0);
 
-      if(char === "<") insideTag=true;
-      output += char;
-      if(char === ">") insideTag=false;
-
-      paragraph.innerHTML=output;
-
-      i++;
-
-      let speed=34;
-
-      if(insideTag) speed=0;
-      if(char==="," || char===".") speed=180;
-      if(char==="…") speed=360;
-
-      setTimeout(typeChar,speed);
+      if (element.classList.contains("wish")) {
+        typeWish(element, chapter, drainQueue);
+      } else {
+        setTimeout(() => {
+          element.classList.add("visible");
+          updateProgress(chapter);
+          setTimeout(drainQueue, 430);
+        }, 140);
+      }
     }
 
-    typeChar();
-  }
+    function typeWish(element, chapter, done) {
+      const fullText = element.getAttribute("data-text") || "";
+      let index = 0;
+      let output = "";
+      let insideTag = false;
 
-  typeNextParagraph();
-}
+      element.classList.add("visible", "typing");
 
-function startSlideshow(){
-  const slides=document.querySelectorAll(".slide");
-  let current=0;
+      function tick() {
+        if (index >= fullText.length) {
+          element.innerHTML = fullText;
+          element.classList.remove("typing");
+          updateProgress(chapter);
+          const pause = fullText.includes("Love you") ? 1500 : fullText.includes("rumah") ? 1200 : 650;
+          setTimeout(done, pause);
+          return;
+        }
 
-  slideInterval=setInterval(()=>{
-    slides[current].classList.remove("active");
-    current=(current+1)%slides.length;
-    slides[current].classList.add("active");
-  },8000);
-}
+        const char = fullText[index];
+        if (char === "<") insideTag = true;
+        output += char;
+        if (char === ">") insideTag = false;
+        element.innerHTML = output;
+        index += 1;
 
-function startProgressBar(){
-  const song=document.getElementById("song");
-  const progress=document.getElementById("progress");
+        let delay = 26;
+        if (insideTag) delay = 0;
+        else if (char === "," || char === ".") delay = 130;
+        else if (char === "—") delay = 230;
+        setTimeout(tick, delay);
+      }
 
-  progressInterval=setInterval(()=>{
-    if(song.duration && !isNaN(song.duration)){
-      progress.style.width=(song.currentTime/song.duration*100)+"%";
+      tick();
     }
-  },300);
-}
 
-function createHearts(){
-  const hearts=document.getElementById("hearts");
-  const symbols=["♡","♥","❥","💕"];
+    function updateProgress(chapterId) {
+      revealDone += 1;
+      const percent = Math.min(100, Math.round((revealDone / revealTotal) * 100));
+      $("#progFill").style.width = `${percent}%`;
+      $("#percentLabel").textContent = `${percent}%`;
 
-  for(let i=0;i<42;i++){
-    const span=document.createElement("span");
-    span.textContent=symbols[Math.floor(Math.random()*symbols.length)];
-    span.style.left=Math.random()*100+"vw";
-    span.style.fontSize=(14+Math.random()*24)+"px";
-    span.style.animationDelay=Math.random()*9+"s";
-    span.style.animationDuration=(8+Math.random()*9)+"s";
-    hearts.appendChild(span);
-  }
-}
+      if (chapterId && chapterId !== currentChapter) {
+        if (currentChapter) {
+          $(`#chapter-dot-${currentChapter}`)?.classList.remove("active");
+          $(`#chapter-dot-${currentChapter}`)?.classList.add("done");
+          const oldLine = $(`#chapter-line-${currentChapter}`);
+          if (oldLine) oldLine.style.width = "100%";
+        }
 
-createHearts();
-</script>
+        currentChapter = chapterId;
+        const chapter = CONFIG.chapters.find((item) => item.id === chapterId);
+        $(`#chapter-dot-${chapterId}`)?.classList.add("active");
+        $("#chapterLabel").textContent = chapter ? chapter.label : "Membaca surat…";
+      }
 
+      if (percent >= 100) {
+        $(`#chapter-dot-${currentChapter}`)?.classList.remove("active");
+        $(`#chapter-dot-${currentChapter}`)?.classList.add("done");
+        $("#chapterLabel").textContent = "Selesai ♡";
+      }
+    }
+
+    function updateMusicButton() {
+      musicButton.textContent = song.paused ? "Play music" : "Pause music";
+    }
+
+    function toggleMusic() {
+      if (song.paused) song.play().catch(() => {});
+      else song.pause();
+      setTimeout(updateMusicButton, 50);
+    }
+
+    function toggleAutoScroll() {
+      autoScroll = !autoScroll;
+      scrollButton.textContent = autoScroll ? "Stop scroll" : "Scroll";
+
+      if (autoScroll) {
+        scrollTimer = setInterval(() => {
+          const bottom = window.innerHeight + window.scrollY >= document.body.scrollHeight - 6;
+          if (bottom) toggleAutoScroll();
+          else window.scrollBy({ top: 1.15, behavior: "auto" });
+        }, 28);
+      } else {
+        clearInterval(scrollTimer);
+      }
+    }
+
+    function createHearts() {
+      const container = $("#hearts");
+      const symbols = ["♡", "✿", "♥"];
+      symbols.forEach((symbol) => {
+        for (let i = 0; i < 9; i++) {
+          const span = document.createElement("span");
+          span.textContent = symbol;
+          span.style.left = `${Math.random() * 100}vw`;
+          span.style.fontSize = `${12 + Math.random() * 15}px`;
+          span.style.animationDelay = `${Math.random() * 14}s`;
+          span.style.animationDuration = `${10 + Math.random() * 11}s`;
+          container.appendChild(span);
+        }
+      });
+    }
+
+    applyConfig();
+    buildPhotos();
+    buildChapterDots();
+    createHearts();
+
+    envelope.addEventListener("click", openEnvelope);
+    envelope.addEventListener("keydown", (event) => {
+      if (event.key === "Enter" || event.key === " ") {
+        event.preventDefault();
+        openEnvelope();
+      }
+    });
+    musicButton.addEventListener("click", toggleMusic);
+    song.addEventListener("play", updateMusicButton);
+    song.addEventListener("pause", updateMusicButton);
+    scrollButton.addEventListener("click", toggleAutoScroll);
+  </script>
 </body>
 </html>
