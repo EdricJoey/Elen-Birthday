@@ -544,19 +544,9 @@
       color: var(--mocha);
       font-size: 0.72rem;
       font-style: italic;
-      letter-spacing: 0.22em;
-      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      text-transform: none;
       opacity: 0.58;
-    }
-
-    .photo-hint {
-      margin-top: 2px;
-      text-align: center;
-      color: var(--mocha);
-      font-size: 0.64rem;
-      letter-spacing: 0.18em;
-      text-transform: uppercase;
-      opacity: 0.42;
     }
 
     .lightbox {
@@ -746,8 +736,8 @@
       background: rgba(255, 253, 248, 0.9);
       color: var(--mocha);
       font-size: 0.72rem;
-      letter-spacing: 0.22em;
-      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      text-transform: none;
       box-shadow: 0 16px 38px rgba(67, 41, 22, 0.15);
       backdrop-filter: blur(12px);
       transition: opacity .35s ease, transform .35s ease;
@@ -874,36 +864,41 @@
 
     <section class="letter-outer">
       <article class="letter-paper" aria-label="Birthday letter">
-        <h2 class="dear" id="dearTitle">Happy Birthday</h2>
+                <h2 class="dear" id="dearTitle">Happy Birthday</h2>
         <div class="dear-rule"></div>
 
         <p class="wish" data-chapter="1" data-text="<span class='hl pulse'>Happy birthday, sayangku.</span>"></p>
-        <p class="wish" data-chapter="1" data-text="<span class='hl'>Selamat ulang tahun yang ke 28, cintaku.</span> Hari ini bukan sekadar pertambahan angka — tapi tentang bagaimana semesta diam-diam merayakan hadirnya kamu, seseorang yang bukan hanya berarti, tapi juga <span class='hl'>menjadi bagian dari makna hidupku.</span>"></p>
+
+        <p class="wish" data-chapter="1" data-text="<span class='hl'>Selamat ulang tahun yang ke 28, cintaku.</span><br>Hari ini bukan sekadar pertambahan angka, tapi tentang bagaimana semesta diam-diam merayakan hadirnya kamu, seseorang yang bukan hanya berarti, tapi juga <span class='hl'>menjadi bagian dari makna hidupku.</span>"></p>
+
         <div class="photo-moment" data-chapter="1" data-photo="photo1.jpg" data-caption="kamu, selalu"></div>
 
-        <div class="pull-quote" data-chapter="2">“Semoga setiap langkahmu dipenuhi jalan yang baik, dan setiap impianmu menemukan jalannya.”</div>
-        <p class="wish" data-chapter="2" data-text="Aku berdoa, semoga setiap langkahmu selalu dipenuhi jalan yang baik. <span class='hl'>Semoga semua cita-citamu menemukan jalannya untuk terwujud,</span> dan setiap impian yang kamu simpan dengan sabar perlahan datang menghampiri — tanpa ragu."></p>
-        <p class="wish" data-chapter="2" data-text="Semoga Tuhan selalu menjaga kamu, memberkati setiap usahamu, dan melimpahkan rezeki serta kebahagiaan yang tak pernah habis."></p>
-        <div class="float-word" data-chapter="2">Amiiinn ♡</div>
+        <p class="wish" data-chapter="2" data-text="Aku berdoa, semoga setiap langkahmu selalu dipenuhi jalan yang baik.<br><span class='hl'>Semoga semua cita-citamu menemukan jalannya untuk terwujud,</span><br>dan setiap impian yang kamu simpan dengan sabar perlahan datang menghampiri, tanpa ragu.<br>Semoga Tuhan selalu menjaga kamu, memberkati setiap usahamu,<br>dan melimpahkan rezeki serta kebahagiaan yang tak pernah habis."></p>
+
+        <div class="float-word" data-chapter="2">AMIIIINNNN ♡</div>
+
         <div class="photo-moment" data-chapter="2" data-photo="photo2.jpg" data-caption="doaku selalu untukmu"></div>
         <div class="ornament" data-chapter="2">✦ ✦ ✦</div>
 
-        <p class="wish" data-chapter="3" data-text="Terima kasih karena sudah hadir dalam hidupku. Sejak ada kamu, aku mengenal rasa yang sebelumnya tak pernah benar-benar aku pahami —"></p>
-        <div class="pull-quote" data-chapter="3">“Kebahagiaan yang sederhana, tapi terasa utuh dan menenangkan.”</div>
-        <p class="wish" data-chapter="3" data-text="Seolah dunia yang dulu berjalan begitu saja, kini punya warna, punya arah, dan punya alasan untuk terus diperjuangkan."></p>
+        <p class="wish" data-chapter="3" data-text="Terima kasih karena sudah hadir dalam hidupku.<br>Sejak ada kamu, aku mengenal rasa yang sebelumnya tak pernah benar-benar aku pahami, <span class='hl'>kebahagiaan yang sederhana, tapi terasa utuh dan menenangkan.</span><br>Seolah dunia yang dulu berjalan begitu saja, kini punya warna, punya arah, dan punya alasan untuk terus diperjuangkan."></p>
+
         <div class="photo-moment" data-chapter="3" data-photo="photo3.jpg" data-caption="momen yang selalu aku ingat"></div>
-        <p class="wish" data-chapter="3" data-text="<span class='hl'>Terima kasih karena sudah mencintaiku dengan begitu tulus.</span> Terima kasih karena selalu ada, bahkan di saat aku tidak mudah untuk dimengerti. Kehadiranmu bukan hanya menemani, tapi juga <span class='hl'>menguatkan, menenangkan, dan tanpa sadar — menyembuhkan.</span>"></p>
+
+        <p class="wish" data-chapter="3" data-text="<span class='hl'>Terima kasih karena sudah mencintaiku dengan begitu tulus.</span><br>Terima kasih karena selalu ada, bahkan di saat aku tidak mudah untuk dimengerti.<br>Kehadiranmu bukan hanya menemani, tapi juga <span class='hl'>menguatkan, menenangkan, dan tanpa sadar, menyembuhkan.</span>"></p>
+
         <div class="ornament" data-chapter="3">✦ ✦ ✦</div>
 
-        <p class="wish" data-chapter="4" data-text="Di hari spesialmu ini, aku hanya ingin kamu bahagia. Sungguh, <span class='hl'>kebahagiaanmu adalah hal yang paling ingin aku jaga, lebih dari apa pun.</span>"></p>
-        <p class="wish" data-chapter="4" data-text="Karena di dalam senyummu, aku menemukan arah, dan di sanalah tujuan hidupku perlahan menjadi jelas. Seolah setiap langkahku, pada akhirnya, selalu ingin kembali padamu."></p>
+        <p class="wish" data-chapter="4" data-text="Di hari spesialmu ini, aku hanya ingin kamu bahagia.<br>Sungguh, <span class='hl'>kebahagiaanmu adalah hal yang paling ingin aku jaga, lebih dari apa pun.</span><br>Karena di dalam senyummu, aku menemukan arah, dan di sanalah, tujuan hidupku perlahan menjadi jelas.<br>Seolah setiap langkahku, pada akhirnya, selalu ingin kembali padamu."></p>
+
         <div class="photo-moment" data-chapter="4" data-photo="photo4.jpg" data-caption="senyummu yang aku suka"></div>
         <div class="ornament" data-chapter="4">✦ ✦ ✦</div>
 
-        <p class="wish" data-chapter="5" data-text="Aku berharap kita akan terus seperti ini — <span class='hl'>berjalan berdampingan, melewati waktu tanpa saling melepaskan.</span> Bukan hanya hari ini, tapi untuk hari-hari panjang yang belum kita tulis ceritanya."></p>
-        <p class="wish" data-chapter="5" data-text="Jika suatu saat langkah kita terasa berat, aku ingin tetap di sampingmu, menggenggam tanpa banyak kata, memastikan kamu tidak pernah merasa sendiri."></p>
+        <p class="wish" data-chapter="5" data-text="Aku berharap kita akan terus seperti ini, <span class='hl'>berjalan berdampingan, melewati waktu tanpa saling melepaskan.</span><br>Bukan hanya hari ini, tapi untuk hari-hari panjang yang belum kita tulis ceritanya.<br>Jika suatu saat langkah kita terasa berat, aku ingin tetap di sampingmu, menggenggam tanpa banyak kata, memastikan kamu tidak pernah merasa sendiri."></p>
+
         <div class="photo-moment" data-chapter="5" data-photo="photo5.jpg" data-caption="untuk hari-hari yang belum kita tulis"></div>
-        <div class="pull-quote" data-chapter="5">“Terima kasih, sayang — karena sudah menjadi rumah, tempat aku pulang, tanpa harus pergi ke mana-mana.”</div>
+
+        <p class="wish" data-chapter="5" data-text="Terima kasih, sayang…<br>karena sudah menjadi rumah, tempat aku pulang, tanpa harus pergi ke mana-mana."></p>
+
         <p class="wish final" data-chapter="5" data-text="Love you, always. ♡"></p>
       </article>
     </section>
